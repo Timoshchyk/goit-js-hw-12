@@ -15,6 +15,6 @@ export function renderPhotos(data, gallery, options) {
     .join('');
 
   gallery.insertAdjacentHTML('beforeend', markup);
-
   new SimpleLightbox('.gallery a', options);
 }
+

@@ -45,13 +45,12 @@ const options = {
   captionPosition: 'bottom',
   captionDelay: 250,
 };
-
 fetchPicturesForm.addEventListener('submit', async e => {
   showLoader();
   page = 1;
   e.preventDefault();
   gallery.innerHTML = '';
-  userQuery = userInput.value;
+  userQuery = userInput.value.trim();
 
   try {
     const photos = await fetchPhotos(userQuery, page, per_page);
@@ -121,3 +120,8 @@ loadMoreBtn.addEventListener('click', async () => {
     hideLoadMoreButton();
   }
 });
+
+
+
+
+
