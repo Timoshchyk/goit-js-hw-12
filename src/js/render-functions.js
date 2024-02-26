@@ -15,8 +15,10 @@ export function renderPhotos(data, gallery, options) {
     .join('');
 
   gallery.insertAdjacentHTML('beforeend', markup);
-  // new SimpleLightbox('.gallery a', options);
-  let gallery11 = new SimpleLightbox('.gallery a');
-  gallery11.refresh();
-}
 
+  if (!gallery11) {
+    gallery11 = new SimpleLightbox('.gallery a', options);
+  } else {
+    gallery11.refresh();
+  }
+}
