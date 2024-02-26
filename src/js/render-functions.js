@@ -1,18 +1,35 @@
-function imgTemplate(hit) {
-  const {
-    largeImageURL,
-    webformatURL,
-    tags,
-    likes,
-    views,
-    comments,
-    downloads,
-  } = hit;
-  return `<li class="list-item"><a href="${largeImageURL}">
-          <img class="item-img" src="${webformatURL}" alt="${tags}" ></a><div class="container"><p><b>Likes: </b><br>${likes}</p><p><b>Views: </b><br>${views}</p><p><b>Comments: </b><br>${comments}</p><p><b>Downloads: </b><br>${downloads}</p>
-          </div></li>`;
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+import { refs } from '../main';
+
+function hitTemplate(hit) {
+    const { largeImageURL, webformatURL, tags, likes, views, comments, downloads } = hit;
+    return `<li class="gallery-item">
+    <a class="gallery-link" href="${largeImageURL}">
+        <img 
+            class="gallery-image"
+            src="${webformatURL}" 
+            alt="${tags}"
+        />
+    </a>
+    <div class="description">
+    <p><b>Likes</b>${likes}</p>
+    <p><b>Views</b>${views}</p>
+    <p><b>Comments</b>${comments}</p>
+    <p><b>Downloads</b>${downloads}</p>
+    </div>
+    </li>`
 }
 
-export function imgsTemplate(hits) {
-  return hits.map(imgTemplate).join('');
+function hitsTemplate(hits) {
+    return hits.map(hitTemplate).join("");
 }
+
+export function renderHits(hits) {
+    const markup = hitsTemplate(hits);
+    refs.gallery.insertAdjacentHTML("beforeend", markup);
+    lightbox.refresh();
+}
+
+let lightbox = new SimpleLightbox(".gallery a", { captionDelay: 250, });
+lightbox.on('show.simplelightbox'); 
